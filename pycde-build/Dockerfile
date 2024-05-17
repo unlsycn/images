@@ -9,3 +9,9 @@ RUN cd /tmp && bash get-verilator.sh
 
 COPY get-capnp.sh /tmp
 RUN cd /tmp && bash get-capnp.sh
+
+# Install sccache
+ENV sccache_version=0.5.4
+RUN wget --progress=dot:mega https://github.com/mozilla/sccache/releases/download/v${sccache_version}/sccache-v${sccache_version}-$(arch)-unknown-linux-musl.tar.gz
+RUN tar -zxf sccache-v${sccache_version}-$(arch)-unknown-linux-musl.tar.gz
+RUN cp sccache-v${sccache_version}-$(arch)-unknown-linux-musl/sccache /usr/bin
