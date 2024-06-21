@@ -44,9 +44,9 @@ COPY *.sh /tmp/
 # Install modern release of CMake
 RUN /tmp/cmake.sh
 
-# Compile, install, then cleanup Cap'nProto
-RUN /tmp/capnp.sh
-RUN rm -r /tmp/capnp
+# Compile, install, then cleanup gRPC
+RUN /tmp/grpc.sh
+RUN rm -r /tmp/grpc
 
 # Compile, install, then cleanup Verilator
 RUN /tmp/verilator.sh
