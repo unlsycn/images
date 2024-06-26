@@ -19,7 +19,6 @@ cd cmake/build
 cmake -S ../.. -B . \
   -G Ninja \
   -DgRPC_INSTALL=ON \
-  -DgRPC_ABSL_PROVIDER=package \
   -DCMAKE_BUILD_TYPE=Release
 ninja -j$(nproc)
 cmake --install .

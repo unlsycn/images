@@ -16,20 +16,13 @@ tar -zxf v$OR_TOOLS_VER.tar.gz
 rm v$OR_TOOLS_VER.tar.gz
 cd or-tools-$OR_TOOLS_VER
 cmake -S . -B build \
-  -DBUILD_DEPS=OFF \
+  -GNinja \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DBUILD_DEPS=ON \
   -DBUILD_SAMPLES=OFF \
   -DBUILD_EXAMPLES=OFF \
   -DBUILD_FLATZINC=OFF \
-  -DUSE_SCIP=OFF \
-  -DBUILD_re2=ON \
-  -DBUILD_Eigen3=ON \
-  -DBUILD_CoinUtils=ON \
-  -DBUILD_Osi=ON \
-  -DBUILD_Clp=ON \
-  -DBUILD_Cgl=ON \
-  -DBUILD_Cbc=ON \
-  -DBUILD_GLPK=ON \
-  -DBUILD_HIGHS=ON
+  -DUSE_SCIP=OFF
 
 cmake --build build --parallel $(nproc)
 cmake --install build --prefix /usr

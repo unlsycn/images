@@ -48,13 +48,9 @@ RUN /tmp/cmake.sh
 RUN /tmp/verilator.sh
 RUN rm -r /tmp/verilator-*
 
-# Install common dep for OR-Tools and gRPC.
-RUN /tmp/abseil.sh
-RUN rm -r /tmp/abseil-cpp
-
 # Compile, install, then cleanup gRPC
-RUN /tmp/grpc.sh
-RUN rm -r /tmp/grpc
+# RUN /tmp/grpc.sh
+# RUN rm -r /tmp/grpc
 
 # Compile, install, then cleanup OR-Tools
 RUN /tmp/or-tools.sh
