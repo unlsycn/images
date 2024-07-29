@@ -1,0 +1,21 @@
+name: Build and push ESI Runtime wheel build image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-push-image:
+    name: Build and push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get CIRCT images repo
+        uses: actions/checkout@v4
+      - name: Build and push image
+        working-directory: ./esiruntime-wheel
+        run: |
+          TAG=$(date -u +%Y%m%d%H%M%S)
+          echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+          docker build . --tag ghcr.io/${{github.repository}}/esiruntime-wheel:$TAG
+          docker push ghcr.io/${{github.repository}}/esiruntime-wheel:$TAG
+          docker tag ghcr.io/${{github.repository}}/esiruntime-wheel:$TAG ghcr.io/${{github.repository}}/esiruntime-wheel:latest
+          docker push ghcr.io/${{github.repository}}/esiruntime-wheel:latest
