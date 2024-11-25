@@ -25,7 +25,7 @@ jobs:
       - name: Setup environment
         run: |
           TAG=$(echo $GITHUB_REF | cut -d / -f 3)
-          echo "GHCR_TAG=ghcr.io/${{github.repository}}/circt-integration-test:$GIT_TAG" >> $GITHUB_ENV
+          echo "GHCR_TAG=ghcr.io/${{github.repository}}/circt-integration-test:$TAG" >> $GITHUB_ENV
 
       - name: Build image
         run: docker build . --tag $GHCR_TAG
