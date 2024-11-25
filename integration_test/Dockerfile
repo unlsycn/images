@@ -14,10 +14,13 @@ RUN apt-get update && apt-get install -y \
   clang-tidy \
   curl \
   flex \
+  gawk \
   git \
   gperf \
+  libffi-dev \
   libfl-dev \
   libfl2 \
+  libreadline-dev \
   libssl-dev \
   libsystemc-dev \
   libtool \
@@ -29,10 +32,11 @@ RUN apt-get update && apt-get install -y \
   pkg-config \
   software-properties-common \
   tar \
+  tcl-dev \
   unzip \
   valgrind \
   wget \
-  yosys
+  zlib1g-dev
 
 RUN apt-get update && apt-get install -y \
   python3.8-dev python3-pip python3.9-dev

@@ -3,12 +3,13 @@
 
 YOSYS_VER=0.47
 
+mkdir -p /tmp/yosys
+cd /tmp/yosys
+wget https://github.com/YosysHQ/yosys/releases/download/$YOSYS_VER/yosys.tar.gz
+tar -zxf yosys.tar.gz
+export PREFIX=/usr
+make config-clang
+make -j$(nproc)
+make install
 cd /tmp
-wget https://github.com/YosysHQ/yosys/archive/refs/tags/$YOSYS_VER.tar.gz
-tar -zxf $YOSYS_VER.tar.gz
-rm $YOSYS_VER.tar.gz
-cd yosys-$YOSYS_VER
-make PREFIX=/usr -j$(nproc)
-make PREFIX=/usr install
-cd ..
-rm -r yosys-$YOSYS_VER
+rm -r /tmp/yosys
