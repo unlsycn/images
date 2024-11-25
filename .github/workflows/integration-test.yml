@@ -1,20 +1,37 @@
-name: Build and push images
+name: Integration Test Image
 
 on:
+  push:
+    paths:
+      - 'integration-test/**'
+  pull_request:
+    paths:
+      - 'integration-test/**'
   release:
     types: [published]
+  workflow_dispatch:
 
 jobs:
-  build-integration-test-image:
-    name: Build and push Docker image for integration tests
+  build:
+    name: Build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integration-test
     steps:
-      - name: Get CIRCT images repo
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Build and push image
-        working-directory: ./integration-test
+
+      - name: Setup environment
         run: |
           TAG=$(echo $GITHUB_REF | cut -d / -f 3)
+          echo "GHCR_TAG=ghcr.io/${{github.repository}}/circt-integration-test:$GIT_TAG" >> $GITHUB_ENV
+
+      - name: Build image
+        run: docker build . --tag $GHCR_TAG
+
+      - name: Push image
+        if: ${{ github.event_name == 'release' }}
+        run: |
           echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
-          docker build . --tag ghcr.io/${{github.repository}}/circt-integration-test:$TAG
-          docker push ghcr.io/${{github.repository}}/circt-integration-test:$TAG
+          docker push $GHCR_TAG
