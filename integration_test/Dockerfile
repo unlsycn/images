@@ -5,11 +5,34 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install apt-utils -y
 RUN apt-get upgrade -y
 RUN apt-get update && apt-get install -y \
-  man curl wget unzip tar ca-certificates libtool \
-  lsb-release software-properties-common \
-  build-essential ccache make ninja-build pkg-config \
-  autoconf bc bison flex libfl2 libfl-dev perl libssl-dev \
-  git yosys clang-tidy libsystemc-dev valgrind gperf
+  autoconf \
+  bc \
+  bison \
+  build-essential \
+  ca-certificates \
+  ccache \
+  clang-tidy \
+  curl \
+  flex \
+  git \
+  gperf \
+  libfl-dev \
+  libfl2 \
+  libssl-dev \
+  libsystemc-dev \
+  libtool \
+  lsb-release \
+  make \
+  man \
+  ninja-build \
+  perl \
+  pkg-config \
+  software-properties-common \
+  tar \
+  unzip \
+  valgrind \
+  wget \
+  yosys
 
 RUN apt-get update && apt-get install -y \
   python3.8-dev python3-pip python3.9-dev
