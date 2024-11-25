@@ -2,6 +2,7 @@ name: Integration Test Image
 
 on:
   push:
+    branches: [trunk]
     paths:
       - 'integration-test/**'
       - '.github/workflows/integration-test.yml'
